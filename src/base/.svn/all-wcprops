@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/1050/branches/bleeding_edge/dart/client/base
+END
+Env.dart
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/7/branches/bleeding_edge/dart/client/base/Env.dart
+END
+base.dart
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/1050/branches/bleeding_edge/dart/client/base/base.dart
+END
+Size.dart
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/1050/branches/bleeding_edge/dart/client/base/Size.dart
+END
+AnimationScheduler.dart
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/651/branches/bleeding_edge/dart/client/base/AnimationScheduler.dart
+END
+Device.dart
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/213/branches/bleeding_edge/dart/client/base/Device.dart
+END
+DomWrapper.dart
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/7/branches/bleeding_edge/dart/client/base/DomWrapper.dart
+END
