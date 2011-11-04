@@ -110,6 +110,24 @@ equal(o1,o2) {
     }
 }
 
+_list_equal(list1,list2) {
+    if (list1==list2) 
+	return true;
+
+    if (list1 is !List || list2 is !List)
+	return false;
+
+    if (list1.length != list2.length)
+	return false;
+
+    for (int i = 0; i < list1.length; i++) {
+	if (!equal(list1[i], list2[i]))
+	    return false;
+    }
+
+    return true;
+}
+
 _map_equal(map1,map2) {
     if (map1==map2)
 	return true;
