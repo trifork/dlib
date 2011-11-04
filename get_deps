@@ -1,0 +1,79 @@
+#/bin/bash
+
+DEPS_DIR=deps
+CONFIG_FILE=deps.config
+
+LOADED=""
+
+function update_dep_url() {
+
+  local DEP=${1}
+  local URL=${2}
+
+  for D in $LOADED; do
+      if [ $D == $DEP ]; then
+	  return;
+      fi
+  done
+
+  LOADED="$LOADED $DEP"
+  
+  echo "Updating $DEP from $URL..."
+
+  cd $DEPS_DIR
+  
+  if [ ! -d $DEP ]; then
+      git clone $URL $DEP
+  else
+      (cd $DEP; git pull)
+  fi
+  
+  cd ..
+  
+  if [ -d $DEP ]; then
+      chmod -R +w  $DEP
+      rm -Rf $DEP
+  fi
+
+  if [ -d $DEPS_DIR/$DEP/src ]; then 
+      cp -R $DEPS_DIR/$DEP/src $DEP
+      chmod -R a-w $DEP
+  fi
+
+  if [ -f $DEPS_DIR/$DEP/$CONFIG_FILE ]; then
+      update_from_data_file $DEPS_DIR/$DEP/$CONFIG_FILE
+  fi
+
+  if [ ! -f .gitignore ]; then
+      touch .gitignore
+  fi
+
+  if grep $DEP .gitignore; then
+      sleep 0
+  else
+      echo "Adding $DEP to .gitignore"
+      echo $DEP >> .gitignore
+  fi
+
+}
+
+function update_from_data_file() {
+    local FILE=$1
+
+    for DEPANDURL in `cat $FILE | egrep -v '^#.*'`; do
+	
+	local DEP=`echo $DEPANDURL | awk '-F=' '{print $1}'`
+	local URL=`echo $DEPANDURL | awk '-F=' '{print $2}'`
+	
+	update_dep_url $DEP $URL
+	
+    done    
+}
+
+if [ ! -d $DEPS_DIR ]; then
+    mkdir $DEPS_DIR
+fi
+
+update_from_data_file $CONFIG_FILE
+
+
