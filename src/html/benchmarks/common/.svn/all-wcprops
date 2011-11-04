@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/107/branches/bleeding_edge/dart/client/html/benchmarks/common
+END
+JSON.dart
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/7/branches/bleeding_edge/dart/client/html/benchmarks/common/JSON.dart
+END
+Math2.dart
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/7/branches/bleeding_edge/dart/client/html/benchmarks/common/Math2.dart
+END
+BenchUtil.dart
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/107/branches/bleeding_edge/dart/client/html/benchmarks/common/BenchUtil.dart
+END
+Interval.dart
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/7/branches/bleeding_edge/dart/client/html/benchmarks/common/Interval.dart
+END
+common.lib
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/7/branches/bleeding_edge/dart/client/html/benchmarks/common/common.lib
+END
