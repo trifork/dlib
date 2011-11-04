@@ -3,7 +3,7 @@
 // BSD-style license that can be found in the LICENSE file.
 
 #library("http");
-#source("http/http_impl.dart");
+#source("http_impl.dart");
 
 /**
  * HTTP status codes.
