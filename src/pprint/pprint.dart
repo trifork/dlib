@@ -53,11 +53,11 @@ p(obj) {
 }
 
 
-final _NOTHING = const Object();
+final _NONE = const Object();
 
 _entries(res, obj, inc, indent, newline, [separator=":"]) {
   var cnt = obj.length;
-  obj.forEach((k, [v = _NOTHING]) {
+  obj.forEach((k, [v = _NONE]) {
       cnt -= 1;
       res.add(pstr(k,
                    increment:inc,
@@ -65,7 +65,7 @@ _entries(res, obj, inc, indent, newline, [separator=":"]) {
                    content: inc+indent,
                    suffix: indent,
                    newline:newline));
-      if (v !== _NOTHING) {
+      if (v !== _NONE) {
         res.add(separator);
         res.add(pstr(v,
                      increment:inc,

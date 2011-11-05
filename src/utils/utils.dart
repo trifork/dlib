@@ -14,11 +14,17 @@
  * limitations under the License.
  **/
 
-int floor(double num) {
+// Missing math operations
+
+int floor(num) {//HACK!
   String str = num.toString();
   int idx = str.indexOf(".");
+  if (idx == -1) return num;
   return Math.parseInt(str.substring(0,idx));
 }
+
+
+// timing actions
 
 time(action, [watches]) {
   var actionTimer = new StopWatch();
@@ -111,9 +117,6 @@ equal(o1,o2) {
 }
 
 _list_equal(list1,list2) {
-    if (list1==list2) 
-	return true;
-
     if (list1 is !List || list2 is !List)
 	return false;
 
@@ -128,10 +131,22 @@ _list_equal(list1,list2) {
     return true;
 }
 
-_map_equal(map1,map2) {
-    if (map1==map2)
-	return true;
+_set_equal(set1,set2) {
+  if (set1 is !Set || set2 is !Set)
+    return false;
 
+  if (set1.length != set2.length)
+    return false;
+
+  for(var k in set1) {
+    if (!set2.contains(k))
+      return false;
+  }
+
+  return true;
+}
+
+_map_equal(map1,map2) {
     if (map1 is !Map || map2 is !Map)
 	return false;
 
@@ -139,11 +154,9 @@ _map_equal(map1,map2) {
 	return false;
 
     for(var k in map1.getKeys()) {
-	if (!equal(map1[k], map2[k]))
+      if (!(map2.containsKey(k) && equal(map1[k], map2[k])))
 	    return false;
     }
 
     return true;
 }
-
-
