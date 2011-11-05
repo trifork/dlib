@@ -35,4 +35,7 @@ if [ ! -d $DART ]; then
     echo "You must set environment variable DART to the path of the Dart installation"
 else
     update_from_data_file $DART_DEPS_CONFIG
+    rm -f src/http/http_impl.dart src/http.dart
+    cp $DART/samples/chat/http.dart src/
+    cp $DART/samples/chat/http_impl.dart src/http/
 fi
