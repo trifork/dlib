@@ -1,0 +1,38 @@
+#/bin/bash
+
+DART_DEPS_CONFIG=dart_deps.config
+
+function update_dep_path() {
+
+  local DEP=${1}
+  local DIR=${2}
+
+
+  echo "Updating $DEP from $DART/$DIR..."
+
+  if [ -d src/$DEP ]; then
+      rm -Rf src/$DEP
+  fi
+
+  rsync -avC --exclude .DS_Store $DART/$DIR src
+}
+
+function update_from_data_file() {
+
+    local FILE=${1}
+
+    for DEPANDPATH in `cat $FILE | egrep -v '^#.*'`; do
+
+	local DEP=`echo $DEPANDPATH | awk '-F=' '{print $1}'`
+	local DIR=`echo $DEPANDPATH | awk '-F=' '{print $2}'`
+
+	update_dep_path $DEP $DIR
+
+    done
+}
+
+if [ ! -d $DART ]; then
+    echo "You must set environment variable DART to the path of the Dart installation"
+else
+    update_from_data_file $DART_DEPS_CONFIG
+fi
