@@ -25,6 +25,8 @@ int floor(num) {//HACK!
 
 num abs(num n) => n<0 ? -n : n;
 
+int randomInt(int max) => floor(Math.random()*max);
+
 
 // timing actions
 
@@ -65,7 +67,33 @@ second(coll) => nth(1, coll);
 
 final _NOTHING = const Object();
 
-//Maps arent collections, collections dont have map
+//Maps arent collections :(
+
+filter(m, p) {
+  if (m is Map) {
+    return filter_map(m,p);
+  } else if (m is Collection) {
+    return m.filter(p);
+  }
+}
+
+filter_map(m, p) {
+  Map r = {};
+  m.forEach((k,v) {
+      if (p(k,v)) {
+        r[k] = v;
+      }
+    });
+  return r;
+}
+
+key_for_value(Map m, val) {
+  for(var k in m.getKeys()) {
+    if (m[k] == val) return k;
+  }
+}
+
+//collections don't have map, reduce/fold...
 map_with_index(coll, f, [context]) {
   var res = [];
   int idx=0;
