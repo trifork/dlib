@@ -23,6 +23,8 @@ int floor(num) {//HACK!
   return Math.parseInt(str.substring(0,idx));
 }
 
+num abs(num n) => n<0 ? -n : n;
+
 
 // timing actions
 
@@ -44,6 +46,20 @@ time(action, [watches]) {
   }
   return actionTimer.elapsedInUs();
 }
+
+
+
+//missing collection operations
+
+nth(n, s) {
+  for (var e in s) {
+    if (n-- == 0) return e;
+  }
+  throw new IndexOutOfRangeException(n);
+}
+
+first(coll) => nth(0, coll);
+second(coll) => nth(1, coll);
 
 
 
