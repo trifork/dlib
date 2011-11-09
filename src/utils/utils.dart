@@ -14,11 +14,21 @@
  * limitations under the License.
  **/
 
-int floor(double num) {
+// Missing math operations
+
+int floor(num) {//HACK!
   String str = num.toString();
   int idx = str.indexOf(".");
+  if (idx == -1) return num;
   return Math.parseInt(str.substring(0,idx));
 }
+
+num abs(num n) => n<0 ? -n : n;
+
+int randomInt(int max) => floor(Math.random()*max);
+
+
+// timing actions
 
 time(action, [watches]) {
   var actionTimer = new StopWatch();
@@ -41,9 +51,49 @@ time(action, [watches]) {
 
 
 
+//missing collection operations
+
+nth(n, s) {
+  for (var e in s) {
+    if (n-- == 0) return e;
+  }
+  throw new IndexOutOfRangeException(n);
+}
+
+first(coll) => nth(0, coll);
+second(coll) => nth(1, coll);
+
+
+
 final _NOTHING = const Object();
 
-//Maps arent collections, collections dont have map
+//Maps arent collections :(
+
+filter(m, p) {
+  if (m is Map) {
+    return filter_map(m,p);
+  } else if (m is Collection) {
+    return m.filter(p);
+  }
+}
+
+filter_map(m, p) {
+  Map r = {};
+  m.forEach((k,v) {
+      if (p(k,v)) {
+        r[k] = v;
+      }
+    });
+  return r;
+}
+
+key_for_value(Map m, val) {
+  for(var k in m.getKeys()) {
+    if (m[k] == val) return k;
+  }
+}
+
+//collections don't have map, reduce/fold...
 map_with_index(coll, f, [context]) {
   var res = [];
   int idx=0;
@@ -126,9 +176,6 @@ equal(o1,o2) {
 }
 
 _list_equal(list1,list2) {
-    if (list1==list2) 
-	return true;
-
     if (list1 is !List || list2 is !List)
 	return false;
 
@@ -143,10 +190,22 @@ _list_equal(list1,list2) {
     return true;
 }
 
-_map_equal(map1,map2) {
-    if (map1==map2)
-	return true;
+_set_equal(set1,set2) {
+  if (set1 is !Set || set2 is !Set)
+    return false;
 
+  if (set1.length != set2.length)
+    return false;
+
+  for(var k in set1) {
+    if (!set2.contains(k))
+      return false;
+  }
+
+  return true;
+}
+
+_map_equal(map1,map2) {
     if (map1 is !Map || map2 is !Map)
 	return false;
 
@@ -154,11 +213,9 @@ _map_equal(map1,map2) {
 	return false;
 
     for(var k in map1.getKeys()) {
-	if (!equal(map1[k], map2[k]))
+      if (!(map2.containsKey(k) && equal(map1[k], map2[k])))
 	    return false;
     }
 
     return true;
 }
-
-

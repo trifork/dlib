@@ -24,7 +24,7 @@ class EventTargetEvents {
 
   Map<String, EventListenerList> _listeners;
 
-  EventTargetEvents(): this._listeners = <String,EventListener> {};
+  EventTargetEvents(): this._listeners = {};
 
   EventListenerList operator [](String type) {
     return _get(type.toLowerCase());
@@ -59,7 +59,7 @@ class EventListenerList {
     return this;
   }
 
-  EventListenerList dispatch(Event e) {
+  void dispatch(Event e) {
     assert(e.type === _type);
     for (var l in _listeners) {
       l(e);

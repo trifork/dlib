@@ -3,7 +3,7 @@
 // BSD-style license that can be found in the LICENSE file.
 
 #library("http");
-#source("http/http_impl.dart");
+#source("http_impl.dart");
 
 /**
  * HTTP status codes.
@@ -193,12 +193,6 @@ interface HTTPResponse factory HTTPResponseImplementation {
    * Indicate that all the response data has been written.
    */
   void writeDone();
-
-  /**
-   * Set or get statusCode
-   */
-  int get statusCode();
-  void set statusCode(int code);
 }
 
 
