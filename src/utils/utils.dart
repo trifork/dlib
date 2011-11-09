@@ -86,6 +86,21 @@ reduce(coll, init, f) {
 }
 
 
+List toList(Collections coll) {
+    if (coll is List) return coll;
+    var result = [];
+    coll.forEach((e)=> result.add(e));
+    return result;
+}
+
+bool contains(Collection coll, element) {
+    if (coll is Set) {
+	return coll.contains(element);
+    } else {
+	return coll.some((e) => element == e);
+    }
+}
+
 //
 // Implements equals for collections (defaults to == for others)
 //
