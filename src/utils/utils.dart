@@ -16,12 +16,7 @@
 
 // Missing math operations
 
-int floor(num) {//HACK!
-  String str = num.toString();
-  int idx = str.indexOf(".");
-  if (idx == -1) return num;
-  return Math.parseInt(str.substring(0,idx));
-}
+int floor(num) => num ~/ 1;
 
 num abs(num n) => n<0 ? -n : n;
 
