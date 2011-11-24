@@ -26,10 +26,10 @@ int randomInt(int max) => floor(Math.random()*max);
 // timing actions
 
 time(action, [watches]) {
-  var actionTimer = new StopWatch();
+  var actionTimer = new Stopwatch();
   if (watches == null) {
     watches = [];
-  } else if (watches is StopWatch) {
+  } else if (watches is Stopwatch) {
     watches = [watches];
   }
   assert(watches is Collection);
