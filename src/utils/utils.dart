@@ -131,7 +131,7 @@ reduce(coll, init, f) {
 }
 
 
-List toList(Collections coll) {
+List toList(Collection coll) {
     if (coll is List) return coll;
     var result = [];
     coll.forEach((e)=> result.add(e));
