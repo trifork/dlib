@@ -16,7 +16,7 @@
 
 // Missing math operations
 
-int floor(num) => num ~/ 1;
+int floor(num) => num.floor().toInt();
 
 num abs(num n) => n<0 ? -n : n;
 
@@ -93,11 +93,17 @@ map_with_index(coll, f, [context]) {
   var res = [];
   int idx=0;
   coll.forEach((k, [v=_NOTHING]) {
-      if (v === _NOTHING) {
-        res.add(f(k, idx, context));
-      } else {
-        res.add(f([k, v], idx, context));
+      var key = k;
+      if (v !== _NOTHING) {
+        key = [k, v];//pair
       }
+      var val = null;
+      if (f is fun2) {
+        val = f(key,idx);
+      } else if (f is fun3) {
+        val = f(key,idx,context);
+      }
+      res.add(val);
       idx += 1;
     });
   return res;
@@ -152,7 +158,7 @@ bool contains(Collection coll, element) {
 
 equal(o1,o2) {
 
-    if (o1==o2)
+    if (o1 === o2)
 	return true;
 
     switch(true) {

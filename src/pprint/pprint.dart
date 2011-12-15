@@ -43,7 +43,17 @@ pp(obj, [indent="  ", increment="  ", newline=true]) {
              newline: newline));
 }
 
-
+lstr(list) {
+  if (list is! List) return list.toString();
+  StringBuffer sb = new StringBuffer();
+  sb.add("[");
+  for (var i=0;i<list.length;i++) {
+    sb.add(lstr(list[i]));
+    if (i < list.length - 1) sb.add(", ");
+  }
+  sb.add("]");
+  return sb.toString();
+}
 str(obj) {
   return pstr(obj, increment: "", content: "", newline: false);
 }
