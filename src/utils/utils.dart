@@ -64,6 +64,12 @@ final _NOTHING = const Object();
 
 //Maps arent collections :(
 
+reverse(iterable) {
+  List res = [];
+  for (var p in iterable) res.insertRange(0,1,p);
+  return res;
+}
+
 filter(m, p) {
   if (m is Map) {
     return filter_map(m,p);

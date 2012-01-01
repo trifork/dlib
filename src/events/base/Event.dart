@@ -1,4 +1,4 @@
-interface Event factory EventImpl {
+interface Event default EventImpl {
   String get type();
   get payload();
   Event(String type, payload);

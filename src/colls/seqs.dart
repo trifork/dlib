@@ -52,7 +52,7 @@ class SeqIterator<T> implements Iterator<T> {
 class ConsSeq<T> implements ISeq<T>, Seqable<T> {
   final T _first;
   final _rest;
-  const ConsSeq(this._first):
+  const ConsSeq.of(this._first):
     _rest=null;
   const ConsSeq.cons(this._first, ISeq<T> rest):
     _rest = rest;

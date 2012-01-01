@@ -6,11 +6,11 @@ class AIterator<E> implements Iterator<E> {
   bool hasNext() => _idx < _lst.length;
   E next() {
     if (!hasNext()) throw new NoMoreElementsException();
-    return _lst[idx++];
+    return _lst[_idx++];
   }
 }
 
-class AbstractImmutableMap<K,V> implements Map<K,V>, Seqable<Pair<K,V>>, Hashable, Counted, Iterable<Pair<K,V>> {
+class AbstractImmutableMap<K,V> implements Map<K,V>, Seqable, Hashable, Counted, Iterable {
   const AbstractImmutableMap();
 
   bool operator ==(other) {
@@ -22,6 +22,10 @@ class AbstractImmutableMap<K,V> implements Map<K,V>, Seqable<Pair<K,V>>, Hashabl
   V remove(K key) => _un();
   void clear() => _un();
   int count() => length;
+  abstract Collection<K> getKeys();
+
+  abstract V operator [](K key);
+
   ISeq<Pair<K,V>> seq() {
     var s = null;
     for(K k in this.getKeys()) {
@@ -33,8 +37,8 @@ class AbstractImmutableMap<K,V> implements Map<K,V>, Seqable<Pair<K,V>>, Hashabl
   String toString() => str(this);
 }
 
-class AbstractImmutableListMap<E> extends AbstractImmutableMap<int, E>
-    implements List<E>, Map<int,E>, Seqable<E>, Hashable, Counted {
+class AbstractImmutableListMap<E> extends AbstractImmutableMap
+    implements List, Map, Seqable, Hashable, Counted {
   const AbstractImmutableListMap();
   bool operator ==(other) {
     if (other is! AbstractImmutableListMap) {return false;}
@@ -52,6 +56,8 @@ class AbstractImmutableListMap<E> extends AbstractImmutableMap<int, E>
   void setRange(int start, int length, List<E> from, [int startFrom]) => _un();
   void removeRange(int start, int length) => _un();
   void insertRange(int start, int length, [E initialValue]) => _un();
+  abstract E operator [](int index);
+
   ISeq<E> seq() {
     ISeq<E> s = null;
     for (int i=0;i<length;i++) {

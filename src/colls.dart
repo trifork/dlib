@@ -6,11 +6,11 @@
 #source("colls/seqs.dart");
 #source("colls/abstracts.dart");
 #source("colls/wrapping.dart");
-#source("colls/values.dart");
+//#source("colls/values.dart");
 #source("colls/pair.dart");
 
 
-#source("colls/vector.dart");
+//#source("colls/vector.dart");
 
 int simpleHash(Iterable<Hashable> fields) {
   int h = 17;

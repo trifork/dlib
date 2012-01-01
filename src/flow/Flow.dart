@@ -22,17 +22,16 @@ class Flow<T> {
         return _completer.future;
     }
 
-    abstract T run();
+    abstract T run(_);
 
     /** exceptional flow termination */
     bool completeException(var exception) {
-
         if (_completer != null) {
             try {
-                cleanup(false);
+              cleanup(false);
             } finally {
-                _completer.completeException(exception);
-                _completer = null;
+              _completer.completeException(exception);
+              _completer = null;
             }
         }
 
@@ -56,10 +55,10 @@ class Flow<T> {
         }
     }
 
-    protect(void callback(Dynamic arg)) =>
-        (var result) {
+    protect(void callback(arg)) =>
+        ([a]) {
           try {
-              callback(result);
+              callback(a);
           } catch (var e) {
               completeException(e);
           }
@@ -70,9 +69,8 @@ class Flow<T> {
         if (nested is Flow) {
             nested = nested.invoke();
         }
-
         if (nested is !Future) {
-            throw new IllegalAgumentException();
+            throw new Exception();
         }
 
         nested.handleException(fail == null
